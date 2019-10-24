@@ -1,3 +1,9 @@
+*{
+  padding: 0px;
+  margin:0px;
+  box-sizing: border-box;
+}
+
 #test3{
   margin-left: 2vh;
   margin-right: 2vh;
