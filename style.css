@@ -161,22 +161,43 @@ main {
     overflow-wrap: break-word;
 }
 
+/* --- 針對手機版的特殊限制 --- */
 @media (max-width: 767px) {
     .modal-left img {
-        max-height: 50vh; /* 縮小手機上的圖片高度，留空間給文字 */
-        width: auto;
+        /* 【關鍵】讓圖片寬度固定在手機螢幕的 70% */
+        max-width: 70vw; 
+        
+        /* 同時限制高度，避免長方形圖片太長，導致文字被推太下面 */
+        max-height: 50vh; 
+        
+        /* 增加下方的間距，與文字區分開來 */
+        margin-bottom: 20px;
     }
-    
-    .modal-right h2 {
-        font-size: 1.8rem; /* 稍微縮小標題防止斷行 */
+   .modal-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* 讓圖片與文字在手機上都居中對齊 */
+        gap: 10px;
+    }
+
+    .modal-right {
+        width: 90%; /* 讓文字稍微縮進，不要貼到螢幕邊緣 */
+        text-align: center; /* 手機上文字居中通常更美觀 */
     }
 }
 
-.modal-left img { 
-    max-width: 100%; 
-    max-height: 75vh; 
-    box-shadow: var(--shadow);
+.modal-left img {
+    display: block;
+    margin: 0 auto;
+    width: auto;
+    height: auto;
+    
+    /* 預設(電腦/平板) 圖片最大不超過螢幕高度的 75% */
+    max-width: 100%;
+    max-height: 75vh;
+    
     border: 5px solid #fff;
+    box-shadow: var(--shadow);
 }
 
 .modal-right h2 { color: #fff; font-size: 2.2rem; margin-top: 0; }
