@@ -154,7 +154,7 @@ main {
     }
 
 .modal-right {
-    padding: 20px;
+    padding: 40px;
     text-align: left;
     /* 確保長文字會自動換行 */
     word-wrap: break-word; 
@@ -226,6 +226,108 @@ main {
 .close-btn:hover {
     background: rgba(255, 255, 255, 0.2);
 }
+
+/* --- 自我介紹專屬樣式 --- */
+
+.about-content {
+    display: flex;
+    flex-direction: column;
+    max-width: 1000px;
+    width: 100%;
+    gap: 40px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* 畫家照片樣式 */
+.profile-img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 50%; /* 圓形照片更有親和力 */
+    border: 3px solid var(--accent);
+    box-shadow: var(--shadow);
+    display: block;
+    margin: 0 auto;
+}
+
+.about-name {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.about-name span {
+    color: var(--accent);
+    font-weight: 300;
+}
+
+.about-journey {
+    line-height: 2;
+    font-size: 1.1rem;
+    color: var(--text-main);
+    margin-bottom: 30px;
+    text-align: justify;
+}
+
+/* 手稿區域 */
+.sketch-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.sketch-grid img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 4px;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+.sketch-grid img:hover {
+    opacity: 1;
+}
+
+/* --- 平板與電腦版優化 --- */
+@media (min-width: 768px) {
+    .about-content {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .about-left {
+        flex: 0.4;
+    }
+
+    .about-right {
+        flex: 0.6;
+        padding-right: 40px; /* 解決貼邊問題 */
+    }
+
+    .profile-img {
+        width: 300px;
+        height: 400px;
+        border-radius: 4px; /* 電腦版改為長方形更有藝術質感 */
+    }
+}
+
+/* --- 手機版優化 --- */
+@media (max-width: 767px) {
+    .about-name {
+        text-align: center;
+        font-size: 2rem;
+    }
+    
+    .profile-img {
+        width: 180px;
+        height: 180px;
+    }
+}
+
+
 
 /* --- 頁尾 --- */
 footer {
