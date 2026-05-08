@@ -88,38 +88,47 @@ function initSwiper() {
 }
 
 // 5. 事件監聽 (彈窗控制)
+
+
 function initEventListeners(shuffledData) {
-    const modal = document.getElementById('modal');
+    const modal = document.getElementById('modal');           // 作品彈窗
+    const aboutModal = document.getElementById('about-modal'); // 新增的自我介紹彈窗
     
-    // 點擊作品打開彈窗
+    // 1. 作品點擊邏輯 (原本的內容)
     document.querySelectorAll('.artwork-container').forEach(item => {
         item.addEventListener('click', () => {
             const index = item.getAttribute('data-index');
             const art = shuffledData[index];
-            
             document.getElementById('modal-img').src = art.img;
             document.getElementById('modal-title').innerText = art.title;
             document.getElementById('modal-size').innerText = art.size;
             document.getElementById('modal-concept').innerText = art.concept;
             document.getElementById('modal-status').innerText = art.status;
-            
-            modal.style.display = 'flex';
+            modal.style.display = 'flex'; // 顯示作品彈窗
         });
     });
 
-    // 關閉按鈕
+    // 2. 自我介紹點擊邏輯 (新加入的)
+    const aboutLink = document.getElementById('about-link');
+    if (aboutLink) {
+        aboutLink.addEventListener('click', (e) => {
+            e.preventDefault(); // 阻止網頁跳轉
+            aboutModal.style.display = 'flex'; // 顯示自我介紹彈窗
+        });
+    }
+
+    // 3. 關閉按鈕邏輯 (作品與自我介紹)
     document.getElementById('close-modal').addEventListener('click', () => {
         modal.style.display = 'none';
     });
-
-    // 點擊背景關閉
-    window.addEventListener('click', (e) => {
-        if (e.target === modal) modal.style.display = 'none';
+    
+    document.getElementById('close-about').addEventListener('click', () => {
+        aboutModal.style.display = 'none';
     });
 
-    // 自我介紹提示
-    document.getElementById('about-link').addEventListener('click', (e) => {
-        e.preventDefault();
-        alert('自我介紹：這是一位致力於深色調光影探索的畫家個人空間。');
+    // 4. 點擊彈窗外面的「黑色背景」就關閉 (這對長輩很友善)
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) modal.style.display = 'none';
+        if (e.target === aboutModal) aboutModal.style.display = 'none';
     });
 }
