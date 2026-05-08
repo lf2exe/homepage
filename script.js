@@ -78,7 +78,7 @@ function initSwiper() {
             // 【關鍵調整】
             // 因為中間圖佔了 70%，負值要設大一點 (例如 -150 到 -250)
             // 這會讓兩旁的縮小圖「擠」進中間圖的後方兩側
-            stretch: -200, 
+            stretch: -550, 
             
             depth: 100,
             modifier: 1,
