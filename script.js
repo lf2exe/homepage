@@ -127,17 +127,47 @@ function initEventListeners(shuffledData) {
     }
 
     // 3. 關閉按鈕邏輯 (作品與自我介紹)
-    document.getElementById('close-modal').addEventListener('click', () => {
-        modal.style.display = 'none';
-    });
-    
-    document.getElementById('close-about').addEventListener('click', () => {
-        aboutModal.style.display = 'none';
-    });
+// 這裡我們抓取網頁上「所有」具有 .modal-overlay 類別的盒子
+const allModals = document.querySelectorAll('.modal-overlay');
 
-    // 4. 點擊彈窗外面的「黑色背景」就關閉 (這對長輩很友善)
-    window.addEventListener('click', (e) => {
-        if (e.target === modal) modal.style.display = 'none';
-        if (e.target === aboutModal) aboutModal.style.display = 'none';
+// 監聽整個視窗的點擊事件
+window.addEventListener('click', (e) => {
+    // 檢查點擊的目標 (e.target) 是否就是任何一個彈窗的「背景層」
+    allModals.forEach(modal => {
+        if (e.target === modal) {
+            closeSpecificModal(modal);
+        }
     });
+});
+
+// 統一的關閉函數，方便未來擴充動畫效果
+function closeSpecificModal(modal) {
+    modal.style.display = 'none';
+    
+    // 如果未來有背景音樂，也可以在這裡設定關閉時要做的事
+    console.log("視窗已關閉");
+}
+
+/* --- 原本的 X 按鈕功能也要保留，但可以簡化 --- */
+document.querySelectorAll('.close-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        // 找到這個按鈕所屬的那個彈窗並關閉它
+        const parentModal = btn.closest('.modal-overlay');
+        if (parentModal) {
+            closeSpecificModal(parentModal);
+        }
+    });
+});
+
+// 讓所有彈窗內的圖片，點擊後也能觸發關閉
+document.querySelectorAll('.modal-overlay img').forEach(img => {
+    img.style.cursor = 'zoom-out'; // 讓滑鼠變成「縮小」的圖示，提示可以點擊
+    img.addEventListener('click', () => {
+        const parentModal = img.closest('.modal-overlay');
+        if (parentModal) {
+            closeSpecificModal(parentModal);
+        }
+    });
+});
+
 }
